@@ -1,0 +1,514 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "@xyflow/react/dist/style.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Ripple design system — premium fintech, light mode first.
+ * Deep indigo primary, dark navy typography, warm off-white surfaces,
+ * and a soft multi-hue ambient wash that blends behind every surface.
+ *
+ * Status colors: green (healthy), amber (warning), red (critical).
+ * Rule: all color lives here as OKLCH tokens — never hardcode colors in components.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Elevation — soft, wide and low-contrast for a calm, modern surface feel. */
+  --shadow-soft:
+    0 1px 2px -1px oklch(0.27 0.045 268 / 0.06), 0 8px 24px -14px oklch(0.27 0.045 268 / 0.16);
+  --shadow-elevated:
+    0 2px 4px -2px oklch(0.27 0.045 268 / 0.07), 0 18px 44px -20px oklch(0.27 0.045 268 / 0.22);
+  --shadow-glow:
+    0 1px 2px -1px oklch(0.44 0.16 272 / 0.1), 0 14px 36px -16px oklch(0.44 0.16 272 / 0.28);
+}
+
+:root,
+.dark {
+  --radius: 0.75rem;
+
+  /* Pure Obsidian Dark Palette — #000000 canvas, #09090b matte cards, #ffffff text */
+  --background: #000000;
+  --foreground: #ffffff;
+  --card: #09090b;
+  --card-foreground: #ffffff;
+  --popover: #09090b;
+  --popover-foreground: #ffffff;
+  --primary: #ffffff;
+  --primary-foreground: #111111;
+  --secondary: #141417;
+  --secondary-foreground: #ffffff;
+  --muted: #121215;
+  --muted-foreground: #9a9a9a;
+  --accent: #18181c;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --success: #10b981;
+  --success-foreground: #ffffff;
+  --warning: #f59e0b;
+  --warning-foreground: #111111;
+  --border: rgba(255, 255, 255, 0.12);
+  --input: rgba(255, 255, 255, 0.12);
+  --ring: rgba(255, 255, 255, 0.28);
+  --chart-1: #ffffff;
+  --chart-2: #10b981;
+  --chart-3: #f59e0b;
+  --chart-4: #ef4444;
+  --chart-5: #9a9a9a;
+
+  /* Sidebar — pure black with hairline silver border */
+  --sidebar: #000000;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #ffffff;
+  --sidebar-primary-foreground: #111111;
+  --sidebar-accent: rgba(255, 255, 255, 0.05);
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: rgba(255, 255, 255, 0.10);
+  --sidebar-ring: rgba(255, 255, 255, 0.28);
+
+  --ambient-indigo: transparent;
+  --ambient-sky: transparent;
+  --ambient-amber: transparent;
+  --ambient-rose: transparent;
+  --ambient-veil: transparent;
+}
+
+/* ── Vesper Editorial & Material Utilities ── */
+.font-serif-italic {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: #9a9a9a;
+  letter-spacing: -0.02em;
+}
+
+.btn-vesper-solid {
+  background: linear-gradient(180deg, #ffffff 0%, #e7e7e7 48%, #cfcfcf 100%) !important;
+  color: #111111 !important;
+  border: 1px solid #ffffff !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.02em !important;
+  transition: all 0.25s ease !important;
+}
+
+.btn-vesper-solid:hover {
+  background: linear-gradient(180deg, #ffffff 0%, #f3f6ff 42%, #d5def2 100%) !important;
+  border-color: #f2f6ff !important;
+  box-shadow: inset 0 1px 0 #ffffff, 0 0 20px rgba(186, 208, 255, 0.35) !important;
+}
+
+.pill-vesper-metal {
+  background: linear-gradient(105deg, #070708 0%, #222225 48%, #3a3a3e 100%) !important;
+  border: 1px solid rgba(198, 198, 198, 0.4) !important;
+  color: #f3f3f3 !important;
+  transition: all 0.25s ease !important;
+}
+
+.pill-vesper-metal:hover {
+  border-color: rgba(235, 235, 235, 0.9) !important;
+  background: linear-gradient(105deg, #111111 0%, #3a3a3a 45%, #6a6a6a 100%) !important;
+  box-shadow: 0 0 18px rgba(200, 210, 230, 0.18) !important;
+}
+
+.card-vesper {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.035) 0%, rgba(255, 255, 255, 0.01) 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.11) !important;
+  border-radius: 12px !important;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+    background-color: #000000;
+    color: #ffffff;
+  }
+
+  body {
+    background-color: #000000;
+    background-image: none;
+    color: #ffffff;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: color-mix(in oklab, var(--color-primary) 22%, transparent);
+    color: var(--color-foreground);
+  }
+
+  :focus-visible {
+    outline-color: var(--color-ring);
+  }
+
+  button,
+  a,
+  select,
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"],
+  input[type="checkbox"],
+  input[type="radio"],
+  [role="button"],
+  [role="tab"],
+  [role="menuitem"],
+  [role="option"],
+  .cursor-pointer {
+    cursor: pointer;
+  }
+
+  .compact-tables td,
+  .compact-tables th {
+    padding-top: 0.375rem !important;
+    padding-bottom: 0.375rem !important;
+  }
+}
+
+@layer components {
+  /*
+   * Frosted surface — used by the app sidebar and header so scrolling content
+   * fades into the ambient blend instead of cutting against an opaque bar.
+   */
+  .glass-surface {
+    background-color: color-mix(in oklab, var(--color-card) 72%, transparent);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+  }
+
+  /* Applied to the sidebar primitive's inner panel (see ui/sidebar.tsx). */
+  [data-sidebar="sidebar"] {
+    backdrop-filter: blur(22px) saturate(150%);
+    -webkit-backdrop-filter: blur(22px) saturate(150%);
+  }
+
+  /* Slim, unobtrusive scrollbars that match the surface palette. */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in oklab, var(--color-muted-foreground) 28%, transparent) transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: color-mix(in oklab, var(--color-muted-foreground) 26%, transparent);
+    border: 3px solid transparent;
+    border-radius: 9999px;
+    background-clip: content-box;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: color-mix(in oklab, var(--color-muted-foreground) 42%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/*
+ * Sidebar navigation polish (unlayered so it wins over the primitive's utilities):
+ * an active item becomes a soft primary pill with a slim left accent bar.
+ */
+[data-sidebar="menu-button"] {
+  transition:
+    background-color 0.16s ease,
+    color 0.16s ease,
+    width 0.2s ease,
+    height 0.2s ease,
+    padding 0.2s ease;
+}
+
+[data-sidebar="menu-button"][data-active="true"] {
+  background: linear-gradient(90deg, #141416 0%, #26262a 50%, #38383e 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  color: #ffffff !important;
+  font-weight: 500 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) !important;
+}
+
+[data-sidebar="menu-button"][data-active="true"]:hover {
+  background: linear-gradient(90deg, #1a1a1e 0%, #303035 50%, #44444c 100%) !important;
+  color: #ffffff !important;
+}
+
+[data-sidebar="menu-button"]:not([data-active="true"]) {
+  color: #9a9a9a;
+}
+
+[data-sidebar="menu-button"]:not([data-active="true"]):hover {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* React Flow styling aligned with Ripple design tokens */
+.react-flow {
+  background-color: transparent;
+  font-family: var(--font-sans);
+}
+
+.react-flow__controls {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+  background-color: var(--color-card);
+  backdrop-filter: blur(12px);
+}
+
+.react-flow__controls-button {
+  background-color: transparent !important;
+  border-bottom: 1px solid var(--color-border) !important;
+  color: var(--color-foreground) !important;
+  fill: var(--color-foreground) !important;
+  transition: background-color 0.15s ease;
+}
+
+.react-flow__controls-button:hover {
+  background-color: var(--color-muted) !important;
+}
+
+.react-flow__minimap {
+  border: 1px solid var(--color-border) !important;
+  border-radius: var(--radius-md) !important;
+  background-color: var(--color-card) !important;
+  box-shadow: var(--shadow-soft);
+}
+
+/* Ensure edge labels sit permanently above node boxes */
+.react-flow__edgelabel-renderer {
+  z-index: 1000 !important;
+  pointer-events: none;
+}
+
+.react-flow__edge-textwrapper {
+  z-index: 1000 !important;
+}
+
+.react-flow__edge-text {
+  z-index: 1000 !important;
+}
+
+/* ── Zen & Calm Card Attention Styles (Matte Finish) ── */
+.emergency-card-critical {
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  box-shadow: 0 1px 3px 0 rgba(239, 68, 68, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.emergency-card-warning {
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  box-shadow: 0 1px 3px 0 rgba(245, 158, 11, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.emergency-card-stress {
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  box-shadow: 0 1px 3px 0 rgba(139, 92, 246, 0.08);
+  position: relative;
+}
+
+.shimmer-rescue-btn {
+  transition: all 0.2s ease;
+}
+
+.bell-ring {
+  display: inline-block;
+}
+
+/* ── Auth Entrance Keyframes & Stagger Classes ── */
+@keyframes authCardEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(22px) scale(0.97);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+}
+
+@keyframes authItemFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes authOrbGlow {
+  0%, 100% {
+    opacity: 0.7;
+    transform: scale(1) translate(0, 0);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.08) translate(10px, -10px);
+  }
+}
+
+.animate-auth-card {
+  animation: authCardEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-auth-item-1 {
+  animation: authItemFadeUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both;
+}
+
+.animate-auth-item-2 {
+  animation: authItemFadeUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.16s both;
+}
+
+.animate-auth-item-3 {
+  animation: authItemFadeUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.24s both;
+}
+
+.animate-auth-item-4 {
+  animation: authItemFadeUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.32s both;
+}
+
+.animate-auth-item-5 {
+  animation: authItemFadeUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.40s both;
+}
+
+.animate-auth-orb-1 {
+  animation: authOrbGlow 12s ease-in-out infinite alternate;
+}
+
+.animate-auth-orb-2 {
+  animation: authOrbGlow 14s ease-in-out 3s infinite alternate;
+}
+
+/* ── Rump Obsidian Command Deck Components ── */
+.card-rump {
+  background: #09090b;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 1.25rem;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(16px);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-rump:hover {
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.btn-rump-solid {
+  background: #ffffff;
+  color: #000000;
+  font-weight: 600;
+  border-radius: 0.75rem;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.16);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}
+
+.btn-rump-solid:hover:not(:disabled) {
+  background: #f0f0f0;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.26);
+}
+
+.btn-rump-solid:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-rump-solid:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-rump-outline {
+  background: rgba(255, 255, 255, 0.04);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  font-weight: 500;
+  border-radius: 0.75rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-rump-outline:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.btn-rump-outline:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
